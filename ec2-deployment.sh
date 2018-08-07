@@ -1,4 +1,4 @@
 #!/bin/bash
-python --version
 
+curl -O https://bootstrap.pypa.io/get-pip.py
 pip install ansible
