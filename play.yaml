@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  tasks:
+    - name: download and install minikube
+      shell: curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo cp minikube /bin/ && rm minikube
+    - name: start minikube
+      shell: minikube start --vm-driver=none
+    - name: Check-Status
+      shell: minikube status
+    - name: install kubectl
+      shell: curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.10.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /bin/
+    - name: download helm
+      shell: wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.1-linux-amd64.tar.gz
+    - name: Extract foo.tgz into /var/lib/foo
+      unarchive:
+        src: helm-v2.10.0-rc.1-linux-amd64.tar.gz
+        dest: /tmp
+    - name: Move foo to bar
+      command: mv "/tmp/linux-amd64/helm" /bin
+    - name: install helm
+      shell: helm init
+    - name: configure HELM_HOST
+      command: whoami #echo "HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} )" >> ~/.bashrc
