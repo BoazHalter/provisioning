@@ -1,6 +1,16 @@
 ---
 - hosts: localhost
   tasks:
+    - name: remove git
+      shell: yum -y remove git
+- hosts: localhost
+  tasks:
+    - name: install git
+      shell: yum -y install git
+    - name: check git installed
+      shell: git version
+    - name: Stop
+      shell: exit 0
     - name: download and install minikube
       shell: curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo cp minikube /bin/ && rm minikube
     - name: start minikube
