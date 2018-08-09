@@ -1,6 +1,16 @@
 ---
 - hosts: localhost
   tasks:
+    - name:  Yum Update
+      shell: yum update -y
+    - name:  Yum Install Docker
+      shell: yum install -y docker
+    - name:  Start Docker Engine
+      shell: service docker start
+    - name:  Adding Ec2-user To Docker 
+      shell: usermod -a -G docker ec2-user
+    - name:  Check Docker Runnig
+      shell: docker info
     - name: download and install minikube
       shell: curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo cp minikube /bin/ && rm minikube
     - name: start minikube
@@ -15,9 +25,12 @@
       unarchive:
         src: helm-v2.10.0-rc.1-linux-amd64.tar.gz
         dest: /tmp
+    - name: Remove helm-v2.10.0-rc.1-linux-amd64.tar.gz
+      shell: rm -f helm-v2.10.0-rc.1-linux-amd64.tar.gz
     - name: Move foo to bar
       command: mv "/tmp/linux-amd64/helm" /bin
     - name: install helm
       shell: helm init
     - name: configure HELM_HOST
       command: whoami #echo "HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} )" >> ~/.bashrc
+
