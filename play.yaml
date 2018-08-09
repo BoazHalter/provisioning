@@ -1,6 +1,17 @@
 ---
 - hosts: localhost
   tasks:
+    - name: configure HELM_HOST
+      shell: echo "export HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} ):44134" >> ~/.bashrc
+    - name: source bashrc
+      #sudo: no   
+      shell: . /home/username/.bashrc && 
+    - name: upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+    - name: Exit
+      shell: exit 1
     - name:  Yum Update
       shell: yum update -y
     - name:  Yum Install Docker
@@ -32,5 +43,5 @@
     - name: install helm
       shell: helm init
     - name: configure HELM_HOST
-      command: whoami #echo "HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} )" >> ~/.bashrc
+      shell: echo "HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} ):44134" >> ~/.bashrc
 
