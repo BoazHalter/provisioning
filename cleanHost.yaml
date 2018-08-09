@@ -1,5 +1,19 @@
 ---
 - hosts: localhost
   tasks:
-    - name: remove git
-      shell: yum -y remove git
+    - name: Yum Remove Docker
+      shell: yum remove -y docker
+    - name: Check Docker Not Runnig
+      shell: docker info
+      ignore_errors: yes
+    - name: Stop Minikube
+      shell: minikube stop 
+    - name: Minikube Delete   
+      shell: minikube delete
+    - name: Delete minikube binary
+      shell: rm -f /bin/minikube 
+    - name: Check Minikube Deleted
+      shell: minikube status
+      ignore_errors: yes
+    - name: Delete kubectl      
+      shell: rm -f /bin/kubectl 
