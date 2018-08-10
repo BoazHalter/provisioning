@@ -2,7 +2,9 @@
 - hosts: localhost
   tasks:
     - name: Yum Remove Docker
-      shell: yum remove -y docker
+      yum:
+        name: docker
+        state: absent 
     - name: Check Docker Not Runnig
       shell: docker info
       ignore_errors: yes
@@ -11,9 +13,16 @@
     - name: Minikube Delete   
       shell: minikube delete
     - name: Delete minikube binary
-      shell: rm -f /bin/minikube 
+      file:
+        state: absent
+        path: "/bin/minikube"
+      #shell: rm -f /bin/minikube 
     - name: Check Minikube Deleted
       shell: minikube status
       ignore_errors: yes
     - name: Delete kubectl      
-      shell: rm -f /bin/kubectl 
+      #shell: rm -f /bin/kubectl 
+      file:
+        state: absent
+        path: "/bin/kubectl"
+

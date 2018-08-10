@@ -1,47 +1,63 @@
 ---
 - hosts: localhost
   tasks:
-    - name: configure HELM_HOST
-      shell: echo "export HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} ):44134" >> ~/.bashrc
-    - name: source bashrc
-      #sudo: no   
-      shell: . /home/username/.bashrc && 
     - name: upgrade all packages
       yum:
         name: '*'
         state: latest
-    - name: Exit
-      shell: exit 1
-    - name:  Yum Update
-      shell: yum update -y
-    - name:  Yum Install Docker
-      shell: yum install -y docker
+    - name: Yum Install Docker
+      yum:
+        name: docker
+        state: latest
     - name:  Start Docker Engine
-      shell: service docker start
+      systemd:
+        state: started
+        name: docker
     - name:  Adding Ec2-user To Docker 
-      shell: usermod -a -G docker ec2-user
+      user:
+       name: ec2-user
+       shell: /bin/bash
+       groups: docker
+       append: yes
     - name:  Check Docker Runnig
       shell: docker info
-    - name: download and install minikube
-      shell: curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo cp minikube /bin/ && rm minikube
-    - name: start minikube
+    - name: Download and install minikube
+      get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /bin/minikube
+        mode: 0100
+    - name: Start minikube
       shell: minikube start --vm-driver=none
     - name: Check-Status
       shell: minikube status
-    - name: install kubectl
-      shell: curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.10.0/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /bin/
-    - name: download helm
-      shell: wget https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.1-linux-amd64.tar.gz
-    - name: Extract foo.tgz into /var/lib/foo
+    - name: Install kubectl
+      get_url:
+        url: https://storage.googleapis.com/kubernetes-release/release/v1.10.0/bin/linux/amd64/kubectl
+        dest: /bin/kubectl
+        mode: 0100
+    - name: Enable kubectl autocomplete
+      shell: echo "source <(kubectl completion bash)" >> ~/.bashrc
+    - name: Download helm
+      get_url:
+        url: https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.1-linux-amd64.tar.gz
+        dest: /tmp/helm-v2.10.0-rc.1-linux-amd64.tar.gz
+        mode: 0100
+    - name: Extract Helm
       unarchive:
-        src: helm-v2.10.0-rc.1-linux-amd64.tar.gz
-        dest: /tmp
+        src: /tmp/helm-v2.10.0-rc.1-linux-amd64.tar.gz
+        dest: /tmp/
     - name: Remove helm-v2.10.0-rc.1-linux-amd64.tar.gz
-      shell: rm -f helm-v2.10.0-rc.1-linux-amd64.tar.gz
+      file:
+        state: absent
+        path: /tmp/helm-v2.10.0-rc.1-linux-amd64.tar.gz
     - name: Move foo to bar
-      command: mv "/tmp/linux-amd64/helm" /bin
+      command: mv /tmp/linux-amd64/helm /bin
     - name: install helm
       shell: helm init
     - name: configure HELM_HOST
-      shell: echo "HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} ):44134" >> ~/.bashrc
-
+      command: cat "HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} ):44134" >> ~/.bashrc
+      register: cat
+    - debug:
+        var=cat.stdout_lines
+        #msg: "HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} ):44134"
+          
