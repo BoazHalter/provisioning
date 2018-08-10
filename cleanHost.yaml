@@ -9,20 +9,21 @@
       shell: docker info
       ignore_errors: yes
     - name: Stop Minikube
-      shell: minikube stop 
+      shell: minikube stop
+      ignore_errors: yes
     - name: Minikube Delete   
       shell: minikube delete
+      ignore_errors: yes
     - name: Delete minikube binary
       file:
         state: absent
         path: "/bin/minikube"
-      #shell: rm -f /bin/minikube 
+      ignore_errors: yes 
     - name: Check Minikube Deleted
       shell: minikube status
       ignore_errors: yes
-    - name: Delete kubectl      
-      #shell: rm -f /bin/kubectl 
+    - name: Delete kubectl       
       file:
         state: absent
         path: "/bin/kubectl"
-
+      ignore_errors: yes

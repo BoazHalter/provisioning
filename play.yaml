@@ -50,14 +50,16 @@
       file:
         state: absent
         path: /tmp/helm-v2.10.0-rc.1-linux-amd64.tar.gz
-    - name: Move foo to bar
+    - name: Move helm to /bin
       command: mv /tmp/linux-amd64/helm /bin
     - name: install helm
       shell: helm init
     - name: configure HELM_HOST
-      command: cat "HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} ):44134" >> ~/.bashrc
+      shell: echo "export HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} ):44134" >> ~/.bashrc
+    - name: show HELM_HOTST:PORT
+      shell: /bin/cat ~/.bashrc  
       register: cat
     - debug:
-        var=cat.stdout_lines
-        #msg: "HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} ):44134"
-          
+        var: cat
+        verbosity: 4    
+
