@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: ec2-18-219-87-140.us-east-2.compute.amazonaws.com
   tasks:
     - name: upgrade all packages
       yum:
