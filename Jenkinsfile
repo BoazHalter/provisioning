@@ -13,7 +13,7 @@ pipeline
             docker 
 			{
                 image 'ansible/awx_task:1'
-                args '-v /tmp/ansible:/'	
+                //args '-v /tmp/ansible:/'	
             }
         }
 	    stages 
