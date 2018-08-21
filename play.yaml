@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  command: somecommand
   become: yes
   become_user: ec2-user
   tasks:
