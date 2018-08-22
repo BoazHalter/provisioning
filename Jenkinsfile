@@ -27,11 +27,11 @@ pipeline
   				    //-Dsonar.organization=boazhalter-github \
   				    //-Dsonar.host.url=https://sonarcloud.io \
   				    //-Dsonar.login=31fefaf1f833f46277297fcde612b9fdeb6f9cbe''' 
-				timeout(time: 1, unit: 'MINUTES'){              
-			    input 'wait testing testing connection to ec2'
- 
+				//timeout(time: 1, unit: 'MINUTES'){              
+			   
+  //input 'wait testing testing connection to ec2'
 				sh 'ansible-playbook -i inventory.yaml play.yaml -vvv'  
-				}
+				//}
 				
 	                }
 		    }
