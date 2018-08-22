@@ -3,8 +3,10 @@
   become: yes
   become_user: ec2-user
   tasks:
-    - name: sh
-      shell: whoami
+    - name: get the username running the deploy
+      local_action: command whoami
+      register: username_on_the_host
+    - debug: var=username_on_the_host
     - name: upgrade all packages
       yum:
         name: '*'
