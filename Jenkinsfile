@@ -27,7 +27,8 @@ pipeline
   				    //-Dsonar.organization=boazhalter-github \
   				    //-Dsonar.host.url=https://sonarcloud.io \
   				    //-Dsonar.login=31fefaf1f833f46277297fcde612b9fdeb6f9cbe''' 
-              sh 'ansible-playbook -i inventory.yaml play.yaml -vvv'        
+              sh 'ansible-playbook -i inventory.yaml play.yaml -vvv'  
+				
 				
 	                }
 		    }
@@ -36,7 +37,7 @@ pipeline
                 steps
 	            {
                     sh 'echo mvn test'
-			    
+			    input 
                 }
             }
         }	
