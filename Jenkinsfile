@@ -30,7 +30,8 @@ pipeline
 				//timeout(time: 1, unit: 'MINUTES'){              
 			   
   //input 'wait testing testing connection to ec2'
-				sh 'ansible-playbook -i inventory.yaml play.yaml -vvv'  
+                sh' sleep 60'
+	 			sh 'ansible-playbook -i inventory.yaml play.yaml -vvv'  
 				//}
 				
 	                }
