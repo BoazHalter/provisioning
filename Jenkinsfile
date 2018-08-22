@@ -37,7 +37,8 @@ pipeline
                 steps
 	            {
                     sh 'echo mvn test'
-			    input 
+			    input 'wait testing testing connection to ec2'
+ 
                 }
             }
         }	
