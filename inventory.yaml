@@ -1,1 +1,1 @@
-ec2 ansible_host=18.219.87.140
+ec2 ansible_host=18.219.87.140 ansible_user=ec2-user
