@@ -1,7 +1,5 @@
 ---
 - hosts: all
-  become: yes
-  become_user: ec2-user
   tasks:
     - name: get the username running the deploy
       local_action: command whoami
