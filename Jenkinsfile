@@ -18,7 +18,7 @@ pipeline
 			{
                 image 'ansible/awx_task:1'
                 args '-v /root/.ssh:/root/.ssh'
-'	
+	
             }
         }
 	    stages 
