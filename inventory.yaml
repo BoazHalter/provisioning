@@ -1,1 +1,2 @@
+[all]
 ec2 ansible_ssh_host=138.91.121.173 ansible_user=boaz
