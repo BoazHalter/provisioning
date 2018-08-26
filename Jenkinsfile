@@ -13,7 +13,8 @@ pipeline
             docker 
 			{
                 image 'ansible/awx_task:1'
-                args '-v /root/.ssh:/root/.ssh'	
+                args '-v /root/.ssh:/root/.ssh -e AZURE_AD_USER=root -e AZURE_PASSWORD=cueryuc1!cueryuc1!
+'	
             }
         }
 	    stages 
