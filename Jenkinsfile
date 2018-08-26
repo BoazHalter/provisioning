@@ -30,9 +30,11 @@ pipeline
 				//timeout(time: 1, unit: 'MINUTES'){              
 			   
   //input 'wait testing testing connection to ec2'
-                sh 'sleep 600'
+                
 	 			sh '''export AZURE_AD_USER=root	
 				      export AZURE_PASSWORD=cueryuc1!cueryuc1!
+				      sleep 600
+
 				      ansible-playbook -i inventory.yaml play.yaml -vvv
 				   '''  
 				//}
