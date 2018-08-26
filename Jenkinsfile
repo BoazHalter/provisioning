@@ -36,10 +36,8 @@ pipeline
 			   
   //input 'wait testing testing connection to ec2'
                 
-	 			sh '''
-				      sleep 600
-				      ansible-playbook -i inventory.yaml play.yaml -vvv
-				   '''  
+	 			sh '''sleep 600
+				      ansible-playbook -i inventory.yaml play.yaml -vvv'''  
 				//}
 				
 	                }
