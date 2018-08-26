@@ -7,8 +7,8 @@ pipeline
   stages 
   { 
 	 environment {
-        AZURE_AD_USER ='root'
-        AZURE_PASSWORD ='cueryuc1!cueryuc1!'
+        AZURE_AD_USER = 'root'
+        AZURE_PASSWORD = 'cueryuc1!cueryuc1!'
     }  
 	stage('Run Compiler') 
 	{
@@ -17,7 +17,7 @@ pipeline
             docker 
 			{
                 image 'ansible/awx_task:1'
-                args '-v /root/.ssh:/root/.ssh '
+                args '-v /root/.ssh:/root/.ssh'
 '	
             }
         }
