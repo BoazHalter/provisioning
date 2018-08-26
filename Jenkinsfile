@@ -13,7 +13,7 @@ pipeline
 	stage('Run Compiler') 
 	{
         agent 
-		{		
+				
             docker 
 			{
                 image 'ansible/awx_task:1'
