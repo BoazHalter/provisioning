@@ -1,2 +1,2 @@
 [all]
-ec2 ansible_ssh_host=138.91.121.173  ansible_ssh_user=boaz ansible_ssh_pass=cueryuc1!cueryuc1!
+ec2 ansible_ssh_host=40.87.14.39  ansible_ssh_user=boaz ansible_ssh_pass=cueryuc1!cueryuc1!
