@@ -1,1 +1,1 @@
-ec2 ansible_host=138.91.121.173 ansible_user=boaz
+ec2 ansible_ssh_host=138.91.121.173 ansible_user=boaz
