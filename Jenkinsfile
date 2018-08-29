@@ -26,6 +26,7 @@ pipeline
 		        steps
 		        {
 			        echo 's'
+				sh 'sleep 600'
 				sh 'ansible-playbook -i inventory.yaml play.yaml -vvv'    
 			}
 		    }
