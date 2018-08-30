@@ -15,8 +15,8 @@ pipeline
 		{
             docker 
 			{
-                image 'ansible/awx_task:1'
-                args '-v /root/.ssh:/root/.ssh'	
+                image '10.0.0.26:5012/ansible:centos'
+                //args '-v /root/.ssh:/root/.ssh'	
             }
         }
 	    stages 
