@@ -27,7 +27,7 @@
 		        steps
 		        {
 			        echo 's'
-				input ''
+				
 				sh 'ansible-playbook -i inventory.yaml play.yaml -vvv'    
 			}
 		    }
