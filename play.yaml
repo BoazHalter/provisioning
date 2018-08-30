@@ -5,7 +5,7 @@
       local_action: command whoami
       register: username_on_the_host
     - debug: var=username_on_the_host
-    become: yes
+      become: yes
     - name: upgrade all packages
       yum:
         name: '*'
