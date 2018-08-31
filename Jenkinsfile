@@ -3,14 +3,16 @@
 	
   agent none 
   	
-   environment {
+   
+  stages 
+  { 
+	environment {
 	 AZURE_IP = '137.117.108.102'
          AZURE_AD_USER = 'root'	
 	 AZURE_PASSWORD = 'cueryuc1!cueryuc1!'
 	}
-  stages 
-  { 
-	stage('Run Compiler') 
+	  
+	 stage('Run Compiler') 
 	{
 	agent { dockerfile true }	
                 // agent 
