@@ -25,7 +25,7 @@
         	sh ''' 
 		  	ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
 		  	sshpass -p cueryuc1!cueryuc1! scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ~/.ssh/id_rsa.pub boaz@${AZURE_IP}:/home/boaz/.ssh/authorized_keys
-		  	ssh -o "StrictHostKeyChecking no" boaz@$AZURE_IP hostname 
+		  	ssh -o "StrictHostKeyChecking no" boaz@$AZURE_IP 'sudo -i && cp   /home/boaz/.ssh/authorized_keys /root/.ssh/authorized_keys
 		  '''
 		sh 'ansible-playbook -i inventory.yaml play.yaml -b --become-user=root'    
 	      }
