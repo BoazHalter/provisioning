@@ -27,7 +27,7 @@
 			{
 		        steps
 		        {
-			        echo 's'
+			        sh 'printenv'
 				input ''
 				sh 'ansible-playbook -i inventory.yaml play.yaml -vvv'    
 			}
