@@ -1,11 +1,6 @@
-FROM scratch
-ADD centos-7-docker.tar.xz /
-
-
-LABEL org.label-schema.schema-version="1.0" \
-    org.label-schema.name="CentOS Base Image" \
-    org.label-schema.vendor="CentOS" \
-    org.label-schema.license="GPLv2" \
-    org.label-schema.build-date="20180804"
-RUN yum install epel-release && yum install ansible
+FROM centos:latest
+RUN yum install -y epel-release && yum install -y ansible
+RUN yum -y install openssh-server openssh-clients
+RUN ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa.pub
+RUN sshpass -p cueryuc1!cueryuc1! scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ~/.ssh/id_rsa.pub boaz@40.76.26.31:/home/boaz/.ssh/authorized_keys
 CMD ["/bin/bash"]
