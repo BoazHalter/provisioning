@@ -27,7 +27,7 @@
 		  	sshpass -p cueryuc1!cueryuc1! scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ~/.ssh/id_rsa.pub boaz@${AZURE_IP}:/home/boaz/.ssh/authorized_keys
 		  	ssh -o "StrictHostKeyChecking no" boaz@$AZURE_IP "sudo mkdir /root/.ssh && sudo cp /home/boaz/.ssh/authorized_keys /root/.ssh/authorized_keys"
 		  '''
-		sh 'export AZURE_IP=$AZURE_IP ansible-playbook -i inventory.yaml play.yaml -b --become-user=root'    
+		sh 'export AZURE_IP=$AZURE_IP && ansible-playbook -i inventory.yaml play.yaml -b --become-user=root'    
 	      }
 	   }
 	   stage('Test') 
