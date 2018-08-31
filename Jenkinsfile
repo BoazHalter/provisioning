@@ -12,8 +12,7 @@
   { 
 	stage('Run Compiler') 
 	{ 
-		agent { echo '$AZURE_IP'
-			dockerfile true }	
+		agent { dockerfile true }	
  
 
                // agent 
