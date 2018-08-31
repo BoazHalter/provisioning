@@ -11,13 +11,14 @@ pipeline
   { 
 	stage('Run Compiler') 
 	{
-        agent 
+	agent { dockerfile true }	
+        // agent 
 		{
-            docker 
+            //docker 
 			{
-                image '10.0.0.26:5012/ansible:centos'
+        //        image '10.0.0.26:5012/ansible:centos'
                 //args '-v /root/.ssh:/root/.ssh'	
-            }
+          //  }
         }
 	    stages 
 		{
