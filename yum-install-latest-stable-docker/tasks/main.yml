@@ -1,0 +1,18 @@
+---
+# tasks file for yum-install-latest-stable-docker
+- name: Yum Install Docker
+  yum:
+    name: docker
+    state: latest
+- name:  Start Docker Engine
+  systemd:
+    state: started
+    name: docker
+- name:  Adding Ec2-user To Docker 
+  user:
+   name: ec2-user
+   shell: /bin/bash
+   groups: docker
+   append: yes
+- name:  Check Docker Runnig
+  shell: docker info
