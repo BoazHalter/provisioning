@@ -27,10 +27,7 @@
 		  	sshpass -p cueryuc1!cueryuc1! scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  ~/.ssh/id_rsa.pub boaz@${AZURE_IP}:/home/boaz/.ssh/authorized_keys
 		  	ssh -o "StrictHostKeyChecking no" boaz@$AZURE_IP hostname 
 		  '''
-		    
-	         sh 'printenv'
-	         input ''
-		  sh 'ansible-playbook -i inventory.yaml play.yaml -vvv'    
+		sh 'ansible-playbook -i inventory.yaml play.yaml -vvv'    
 	      }
 	   }
 	   stage('Test') 
