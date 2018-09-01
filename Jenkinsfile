@@ -21,6 +21,7 @@
 		  ssh -o "StrictHostKeyChecking no" boaz@$azure_ip hostname 
 		  '''
 		}
+	}
 		
 
                // agent 
