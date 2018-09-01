@@ -19,12 +19,12 @@
       systemd:
         state: started
         name: docker
-    - name:  Adding Ec2-user To Docker 
-      user:
-       name: ec2-user
-       shell: /bin/bash
-       groups: docker
-       append: yes
+    #- name:  Adding Ec2-user To Docker 
+    #  user:
+    #   name: ec2-user
+    #   shell: /bin/bash
+    #   groups: docker
+    #   append: yes
     - name:  Check Docker Runnig
       shell: docker info
     - name: Download and install minikube
