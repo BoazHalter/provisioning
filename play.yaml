@@ -6,10 +6,10 @@
       register: username_on_the_host
     - debug: var=username_on_the_host
       become: yes
-    - name: upgrade all packages
-      yum:
-        name: '*'
-        state: latest
+    #- name: upgrade all packages
+    #  yum:
+    #    name: '*'
+    #    state: latest
         
     - name: Yum Install Docker
       yum:
