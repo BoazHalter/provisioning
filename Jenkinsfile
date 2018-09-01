@@ -12,9 +12,7 @@
   { 
 	stage('Run Compiler') 
 	{ 
-           agent { dockerfile true }
-        stage('Connect to host') 
-	{
+		agent { dockerfile true }
 		steps{
 			sh ''' 
 		  	ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
