@@ -1,0 +1,11 @@
+---
+# tasks file for install-minikube
+- name: Download and install minikube
+  get_url:
+    url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    dest: /bin/minikube
+    mode: 0100
+- name: Start minikube
+  shell: minikube start --vm-driver=none
+- name: Check-Status
+  shell: minikube status
