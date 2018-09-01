@@ -12,7 +12,9 @@
   { 
 	stage('Run Compiler') 
 	{ 
-		agent { dockerfile true }
+		agent { dockerfile true
+				args '-v /tmp:/tmp'
+		}
 		
 	
 	stages 
