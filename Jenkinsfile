@@ -3,7 +3,7 @@
 	
   agent none 
   environment {
-	 AZURE_IP = '40.76.49.210'
+	 AZURE_IP = '40.87.83.154'
          AZURE_AD_USER = 'root'	
 	 AZURE_PASSWORD = 'cueryuc1!cueryuc1!'
 	}	
