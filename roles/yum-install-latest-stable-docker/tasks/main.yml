@@ -10,7 +10,7 @@
     name: docker
 - name:  Adding Ec2-user To Docker 
   user:
-   name: ec2-user
+   name: boaz
    shell: /bin/bash
    groups: docker
    append: yes
