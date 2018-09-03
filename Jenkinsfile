@@ -28,7 +28,7 @@
 		  	ssh -o "StrictHostKeyChecking no" boaz@$AZURE_IP "sudo cp /home/boaz/.ssh/authorized_keys /root/.ssh/authorized_keys"
 		  '''
 		      
-		sh 'export azure_ip=$AZURE_IP && sed -i "s/AZURE_IP/$azure_ip/g" inventory.yaml && ansible-playbook -i inventory.yaml playbooks/azure-deploy-minkube-playbook.yaml '//-b --become-user=root    
+		sh 'export azure_ip=$AZURE_IP && sed -i "s/AZURE_IP/$azure_ip/g" inventory.yaml && ansible-playbook -i inventory.yaml playbooks/deploy-minikube-ec2.yaml'//-b --become-user=root    
 	      }
 	   }
 	   stage('Test') 
