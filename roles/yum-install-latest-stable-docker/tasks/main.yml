@@ -12,7 +12,7 @@
   user:
    name: boaz
    shell: /bin/bash
-   groups: docker
+   groups: dockerroot
    append: yes
 - name:  Check Docker Runnig
   shell: docker info
