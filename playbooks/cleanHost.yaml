@@ -4,7 +4,7 @@
     - name: Yum Remove Docker
       yum:
         name: docker
-        state: absent 
+        state: removed 
     - name: Check Docker Not Runnig
       shell: docker info
       ignore_errors: yes
