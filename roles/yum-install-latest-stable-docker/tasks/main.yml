@@ -1,9 +1,9 @@
 ---
 # tasks file for yum-install-latest-stable-docker
 - name: Yum Remove Docker
-      yum:
-        name: docker*
-        state: removed 
+  yum:
+    name: docker*
+    state: removed 
 - name: Yum Install Docker Dependencies
   yum:
     name: "{{ item }}"
