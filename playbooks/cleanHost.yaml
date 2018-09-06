@@ -3,7 +3,7 @@
   tasks:
     - name: Yum Remove Docker
       yum:
-        name: docker
+        name: docker*
         state: removed 
     - name: Check Docker Not Runnig
       shell: docker info
