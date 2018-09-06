@@ -1,7 +1,24 @@
 ---
 # tasks file for yum-install-latest-stable-docker
-- name: Yum Install Docker
+- name: Yum Remove Docker
+      yum:
+        name: docker*
+        state: removed 
+- name: Yum Install Docker Dependencies
   yum:
+    name: "{{ item }}"
+    state: present  
+  loop:
+     - yum-utils 
+     - device-mapper-persistent-data 
+     - lvm2
+- name: Add repository
+  yum_repository:
+    name: docker-ce
+    description: DOCKER-CE YUM repo
+    baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+- name: Yum Install Docker Dependencies
+  yum:    
     name: docker-ce
     state: latest
 - name:  Start Docker Engine
