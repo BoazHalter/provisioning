@@ -4,32 +4,16 @@
   yum:
     name: docker*
     state: removed 
-- name: Yum Install Docker Dependencies
-  yum:
-    name: "{{ item }}"
-    state: present  
-  loop:
-     - yum-utils 
-     - device-mapper-persistent-data 
-     - lvm2
-- name: Add repository
-  yum_repository:
-    name: docker-ce
-    description: DOCKER-CE YUM repo
-    baseurl: https://download.docker.com/linux/centos/docker-ce.repo
-- name: Yum Install Docker Dependencies
-  yum:    
-    name: docker-ce
-    state: latest
-- name:  Start Docker Engine
-  systemd:
-    state: started
-    name: docker
-- name:  Adding Ec2-user To Docker 
-  user:
-   name: boaz
-   shell: /bin/bash
-   groups: dockerroot
-   append: yes
+- name: Download docker binary
+  get_url:
+    url: https://download.docker.com/linux/static/stable/x86_64/docker-18.06.1-ce.tgz
+    dest: /tmp/docker-18.06.1-ce.tgz
+    mode: 0777
+- name: Extract docker-18.06.1-ce.tgz into /bin/
+  unarchive:
+    src: /tmp/docker-18.06.1-ce.tgz
+    dest: /bin/
+- name: start simple http server in background
+  shell: dockerd &    
 - name:  Check Docker Runnig
   shell: docker info
