@@ -3,7 +3,7 @@
 	
   agent none 
   environment {
-	 AZURE_IP = '40.87.83.154'
+	 AZURE_IP = '137.135.94.240'
          AZURE_AD_USER = 'root'	
 	 AZURE_PASSWORD = 'cueryuc1!cueryuc1!'
 	}	
@@ -28,7 +28,7 @@
 		  	ssh -o "StrictHostKeyChecking no" boaz@$AZURE_IP "sudo cp /home/boaz/.ssh/authorized_keys /root/.ssh/authorized_keys"
 		  '''
 		      
-		sh 'export azure_ip=$AZURE_IP && sed -i "s/AZURE_IP/$azure_ip/g" inventory.yaml && ansible-playbook -i inventory.yaml playbooks/azure-minkube-playbook.yaml'//-b --become-user=root    
+		sh 'export azure_ip=$AZURE_IP && sed -i "s/AZURE_IP/$azure_ip/g" inventory.yaml && ansible-playbook -i inventory.yaml playbooks/cleanHost.yaml'//-b --become-user=root    
 	      }
 	   }
 	   stage('Test') 
