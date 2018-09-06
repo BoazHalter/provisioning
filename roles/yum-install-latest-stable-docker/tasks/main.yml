@@ -2,7 +2,7 @@
 # tasks file for yum-install-latest-stable-docker
 - name: Yum Install Docker
   yum:
-    name: docker
+    name: docker-ce
     state: latest
 - name:  Start Docker Engine
   systemd:
