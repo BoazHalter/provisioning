@@ -1,2 +1,2 @@
 [all]
-ec2 ansible_ssh_host=AZURE_IP  ansible_ssh_user=root ansible_ssh_pass=cueryuc1!cueryuc1!
+azure-ansible ansible_ssh_host=AZURE_IP  ansible_ssh_user=root ansible_ssh_pass=cueryuc1!cueryuc1!
