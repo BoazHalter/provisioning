@@ -4,15 +4,20 @@
   yum:
     name: docker*
     state: removed 
-- name: Download docker binary
-  get_url:
-    url: https://download.docker.com/linux/static/stable/x86_64/docker-18.06.1-ce.tgz
-    dest: /tmp/docker-18.06.1-ce.tgz
-    mode: 0777
-- name: Extract docker-18.06.1-ce.tgz into /bin/
+- name: Unarchive a file that needs to be downloaded (added in 2.0)
   unarchive:
-    src: /tmp/docker-18.06.1-ce.tgz
+    src: https://download.docker.com/linux/static/stable/x86_64/docker-18.06.1-ce.tgz
     dest: /bin/
+    remote_src: yes
+#- name: Download docker binary
+#  get_url:
+#    url: https://download.docker.com/linux/static/stable/x86_64/docker-18.06.1-ce.tgz
+#    dest: /tmp/docker-18.06.1-ce.tgz
+#    mode: 0777
+#- name: Extract docker-18.06.1-ce.tgz into /bin/
+#  unarchive:
+#    src: /tmp/docker-18.06.1-ce.tgz
+#    dest: /bin/
 - name: start simple http server in background
   shell: dockerd &    
 - name:  Check Docker Runnig
