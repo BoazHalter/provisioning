@@ -35,7 +35,7 @@
 		      
 		      //input ''
 		sh '''
-		sudo -i
+		whoami
 		ansible-playbook -i inventory.yaml playbooks/azure-minkube-playbook.yaml
 		'''    
 	      }
