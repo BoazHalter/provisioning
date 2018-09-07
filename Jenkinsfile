@@ -33,7 +33,7 @@
 		        sed -i "s/AZURE_IP/$azure_ip/g" inventory.yaml 
 		'''
 		      
-		      input ''
+		      //input ''
 		sh '''
 		sudo -i
 		ansible-playbook -i inventory.yaml playbooks/azure-minkube-playbook.yaml
