@@ -36,7 +36,7 @@
 		      //input ''
 		sh '''
 		whoami
-		ansible-playbook -i inventory.yaml playbooks/azure-minkube-playbook.yaml
+		ansible-playbook -i inventory.yaml playbooks/play.yaml
 		'''    
 	      }
 	   }
