@@ -1,0 +1,70 @@
+---
+- hosts: all
+  tasks:
+    - name: get the username running the deploy
+      local_action: command whoami
+      register: username_on_the_host
+    - debug: var=username_on_the_host
+      become: yes
+    - name: upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+        
+    - name: Yum Install Docker
+      yum:
+        name: docker
+        state: latest
+    - name:  Start Docker Engine
+      systemd:
+        state: started
+        name: docker
+    - name:  Adding Ec2-user To Docker 
+      user:
+       name: ec2-user
+       shell: /bin/bash
+       groups: docker
+       append: yes
+    - name:  Check Docker Runnig
+      shell: docker info
+    - name: Download and install minikube
+      get_url:
+        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+        dest: /bin/minikube
+        mode: 0100
+    - name: Start minikube
+      shell: minikube start --vm-driver=none
+    - name: Check-Status
+      shell: minikube status
+    - name: Install kubectl
+      get_url:
+        url: https://storage.googleapis.com/kubernetes-release/release/v1.10.0/bin/linux/amd64/kubectl
+        dest: /bin/kubectl
+        mode: 0100
+    - name: Enable kubectl autocomplete
+      shell: echo "source <(kubectl completion bash)" >> ~/.bashrc
+    - name: Download helm
+      get_url:
+        url: https://storage.googleapis.com/kubernetes-helm/helm-v2.10.0-rc.1-linux-amd64.tar.gz
+        dest: /tmp/helm-v2.10.0-rc.1-linux-amd64.tar.gz
+        mode: 0100
+    - name: Extract Helm
+      unarchive:
+        src: /tmp/helm-v2.10.0-rc.1-linux-amd64.tar.gz
+        dest: /tmp/
+    - name: Remove helm-v2.10.0-rc.1-linux-amd64.tar.gz
+      file:
+        state: absent
+        path: /tmp/helm-v2.10.0-rc.1-linux-amd64.tar.gz
+    - name: Move helm to /bin
+      command: mv /tmp/linux-amd64/helm /bin
+    - name: install helm
+      shell: helm init
+    - name: configure HELM_HOST
+      shell: echo "export HELM_HOST=$(kubectl get svc --namespace=kube-system tiller-deploy |grep tiller-deploy |awk {'print $3'} ):44134" >> ~/.bashrc
+    - name: show HELM_HOTST:PORT
+      shell: /bin/cat ~/.bashrc  
+      register: cat
+    - debug:
+        var: cat
+        verbosity: 4    
